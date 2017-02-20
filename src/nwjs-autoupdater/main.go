@@ -2,22 +2,25 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 
-	"github.com/skratchdot/open-golang/open"
 	"nwjs-autoupdater/updater"
+
+	"github.com/skratchdot/open-golang/open"
 )
 
 func main() {
-	var bundle, instDir string
+	var bundle, instDir, appName string
+
+	fmt.Println("WTF!!111")
 
 	flag.StringVar(&bundle, "bundle", "", "Path to the update package")
 	flag.StringVar(&instDir, "inst-dir", "", "Path to the application install dir")
+	flag.StringVar(&appName, "app", "", "Application name")
 	flag.Parse()
-
-	appName := "my_app"
 
 	cwd, _ := os.Getwd()
 	logfile, err := os.Create(filepath.Join(cwd, "updater.log"))
@@ -28,11 +31,10 @@ func main() {
 
 	logger := log.New(logfile, "", log.LstdFlags)
 
-	var appExec string;
+	var appExec string
 	err, appExec = updater.Update(bundle, instDir, appName)
 	if err != nil {
 		logger.Fatal(err)
 	}
-
 	open.Start(appExec)
 }
