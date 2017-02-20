@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
 	"nwjs-autoupdater/updater"
 
@@ -15,7 +16,9 @@ import (
 func main() {
 	var bundle, instDir, appName string
 
-	fmt.Println("WTF!!111")
+	time.Sleep(1000 * time.Millisecond)
+
+	fmt.Println("Windows")
 
 	flag.StringVar(&bundle, "bundle", "", "Path to the update package")
 	flag.StringVar(&instDir, "inst-dir", "", "Path to the application install dir")
@@ -30,6 +33,8 @@ func main() {
 	defer logfile.Close()
 
 	logger := log.New(logfile, "", log.LstdFlags)
+
+	logger.Println(instDir)
 
 	var appExec string
 	err, appExec = updater.Update(bundle, instDir, appName)
