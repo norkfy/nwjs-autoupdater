@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -17,8 +16,6 @@ func main() {
 	var bundle, instDir, appName string
 
 	time.Sleep(1000 * time.Millisecond)
-
-	fmt.Println("Windows")
 
 	flag.StringVar(&bundle, "bundle", "", "Path to the update package")
 	flag.StringVar(&instDir, "inst-dir", "", "Path to the application install dir")
